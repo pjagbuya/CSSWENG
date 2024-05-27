@@ -27,4 +27,5 @@ npm run dev
 # currently no code yet nor command
 npm run dev
 ```
-
+# Project Structure and Format
+- Haven't done it but try to study what's clean architecture
