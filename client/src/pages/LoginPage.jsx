@@ -8,7 +8,7 @@ import Logo from '@/components/logo'
 const LoginPage = () => {
   return (
     <div className="min-h-screen flex bg-background">
-      <div className="p-8 hidden flex-1 bg-foreground md:block">
+      <div className="p-8 hidden flex-1 bg-slate-500 md:block">
         <div className="flex justify-between">
           <Logo />
         </div>
