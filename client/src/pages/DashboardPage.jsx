@@ -1,21 +1,17 @@
 import { useState } from 'react';
 
 import DashboardTable from '@/components/dashboardtable'
-import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import Profile from '@/components/profile'
 import { CirclePlus, SlidersHorizontal } from 'lucide-react'
+import Header from '@/components/Header';
 
 const DashboardPage = () => {
   const [eventFilter, setEventFilter] = useState('');
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="p-3 flex items-center justify-between bg-foreground border-b-2">
-        <Logo lightText={true} />
-        <Profile />
-      </header>
+      <Header />
 
       <main className="px-6 py-4 flex flex-col gap-4 text-left">
         <div>
@@ -30,9 +26,9 @@ const DashboardPage = () => {
           </Button>
 
           <div className="flex gap-4">
-            <Input 
-              placeholder="Search event names..." 
-              onChange={e => setEventFilter(e.target.value)} 
+            <Input
+              placeholder="Search event names..."
+              onChange={e => setEventFilter(e.target.value)}
             />
 
             {/* TODO: Is this really necessary? */}
