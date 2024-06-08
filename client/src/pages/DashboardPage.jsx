@@ -1,30 +1,15 @@
-import React from 'react'
+import { useState } from 'react';
 
+import DashboardTable from '@/components/dashboardtable'
 import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-  } from "@/components/ui/pagination"
 import { Input } from '@/components/ui/input'
 import Profile from '@/components/profile'
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import { CirclePlus, Search, SlidersHorizontal } from 'lucide-react';
+import { CirclePlus, SlidersHorizontal } from 'lucide-react'
 
 const DashboardPage = () => {
+  const [eventFilter, setEventFilter] = useState('');
+
   return (
     <div className="min-h-screen bg-background">
       <header className="p-3 flex items-center justify-between bg-foreground border-b-2">
@@ -39,63 +24,25 @@ const DashboardPage = () => {
         </div>
 
         <div className="flex justify-between">
+          {/* TODO: Handle event creation */}
           <Button>
             <CirclePlus className="mr-2 w-4" /> Create Event
           </Button>
 
           <div className="flex gap-4">
-            <div className="flex">
-              <Input placeholder="Search Events" />
-              <Button variant="outline">
-                <Search className="w-5" />
-              </Button>
-            </div>
+            <Input 
+              placeholder="Search event names..." 
+              onChange={e => setEventFilter(e.target.value)} 
+            />
 
+            {/* TODO: Is this really necessary? */}
             <Button>
               <SlidersHorizontal className="mr-2 w-4" /> Filter
             </Button>
           </div>
         </div>
 
-        <div>
-          <Table className="border-2">
-            <TableCaption>
-              <Pagination className="mt-2 flex items-center">
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious href="#" />
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationEllipsis />
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationNext href="#" />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            </TableCaption>
-
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[100px]">Invoice</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Method</TableHead>
-                <TableHead className="text-right">Amount</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell className="font-medium">INV001</TableCell>
-                <TableCell>Paid</TableCell>
-                <TableCell>Credit Card</TableCell>
-                <TableCell className="text-right">$250.00</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </div>
+        <DashboardTable className="border-2" eventFilter={eventFilter} />
       </main>
     </div>
   )
