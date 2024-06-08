@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Logo from '@/components/logo'
+import { Button } from '@/components/ui/button'
 import {
   Pagination,
   PaginationContent,
@@ -9,7 +10,8 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+  } from "@/components/ui/pagination"
+import { Input } from '@/components/ui/input'
 import Profile from '@/components/profile'
 import {
   Table,
@@ -20,27 +22,45 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { CirclePlus, Search, SlidersHorizontal } from 'lucide-react';
 
 const DashboardPage = () => {
   return (
     <div className="min-h-screen bg-background">
-      <header className="p-4 flex items-center justify-between border-b-2">
-        <Logo />
+      <header className="p-3 flex items-center justify-between bg-foreground border-b-2">
+        <Logo lightText={true} />
         <Profile />
       </header>
 
-      <main className="p-8 flex flex-col gap-4 text-left">
+      <main className="px-6 py-4 flex flex-col gap-4 text-left">
         <div>
-          <h2 className="font-bold text-2xl">Title</h2>
-          <p>Subtitle</p>
+          <h2 className="font-bold text-2xl">Events Dashboard</h2>
+          <p>Here&apos;s a list of all the events.</p>
+        </div>
+
+        <div className="flex justify-between">
+          <Button>
+            <CirclePlus className="mr-2 w-4" /> Create Event
+          </Button>
+
+          <div className="flex gap-4">
+            <div className="flex">
+              <Input placeholder="Search Events" />
+              <Button variant="outline">
+                <Search className="w-5" />
+              </Button>
+            </div>
+
+            <Button>
+              <SlidersHorizontal className="mr-2 w-4" /> Filter
+            </Button>
+          </div>
         </div>
 
         <div>
           <Table className="border-2">
             <TableCaption>
-              A list of your recent invoices.
-
-              <Pagination className="mt-2">
+              <Pagination className="mt-2 flex items-center">
                 <PaginationContent>
                   <PaginationItem>
                     <PaginationPrevious href="#" />
