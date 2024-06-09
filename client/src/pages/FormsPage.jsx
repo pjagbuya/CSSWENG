@@ -1,12 +1,13 @@
+import React from 'react'
 import { useState } from 'react';
-
-import DashboardTable from '@/components/dashboardtable'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { CirclePlus, SlidersHorizontal } from 'lucide-react'
 import Header from '@/components/Header';
+import FormsTable from '@/components/FormsTable';
+import { Button } from '@/components/ui/button';
+import { CirclePlus } from 'lucide-react';
+import { SlidersHorizontal } from 'lucide-react';
+import { Input } from '@/components/ui/input'
 
-const DashboardPage = () => {
+const FormsPage = () => {
   const [eventFilter, setEventFilter] = useState('');
 
   return (
@@ -15,12 +16,11 @@ const DashboardPage = () => {
 
       <main className="px-6 py-4 flex flex-col gap-4 text-left">
         <div>
-          <h2 className="font-bold text-2xl">Events Dashboard</h2>
-          <p>Here&apos;s a list of all the events.</p>
+          <h2 className="font-bold text-2xl">Forms for: Borther Richie’s secret finance forms and transactions</h2>
+          <p>Created: July 5, 2003 | Last Modified: July 5, 2003</p>
         </div>
 
         <div className="flex justify-between">
-          {/* TODO: Handle event creation */}
           <Button>
             <CirclePlus className="mr-2 w-4" /> Create Event
           </Button>
@@ -38,10 +38,10 @@ const DashboardPage = () => {
           </div>
         </div>
 
-        <DashboardTable className="border-2" eventFilter={eventFilter} />
+        <FormsTable className="border-2" eventFilter={eventFilter} />
       </main>
     </div>
   )
 }
 
-export default DashboardPage
+export default FormsPage
