@@ -140,10 +140,12 @@ const DataTable = ({
         <p>Page {currentPageNum} of {table.getPageCount()}</p>
 
         <PaginationPrevious 
+          className="cursor-pointer"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()} 
         />
         <PaginationNext
+          className="cursor-pointer"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         />      
