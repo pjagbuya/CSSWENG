@@ -1,49 +1,43 @@
-import { Button } from './ui/button';
-import { Folder, ReceiptText, X } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Folder, ReceiptText } from 'lucide-react';
 
-// TODO: Determine props to take in
-const EventSelectModal = ({
-  show,
-  onExit
-}) => {
-  if (!show) {
-    return null;
-  }
-  
+const EventSelectModal = ({ open, onOpenChange }) => {
   return (
-    <div 
-      className="fixed inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background shadow-[0_0_0_100vmax_rgb(0_0_0_/0.5)] p-8 w-fit h-fit flex flex-col justify-center"
-    >
-      <Button 
-        className="absolute top-2 right-2 px-2 rounded-full"
-        variant="ghost" 
-        onClick={onExit}
-      >
-        <X />
-      </Button>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Event Name</DialogTitle>
+        </DialogHeader>
 
-      <p className="mb-3 font-bold text-xl">Event Name</p>
+        <div className="py-4">  
+          <p>Created On: X</p>
+          <p>Last Modified On: Y</p>
+        </div>
 
-      <div className="mb-6">
-        <p>Created On: X</p>
-        <p>Last Modified On: Y</p>
-      </div>
+        <DialogFooter className="grid grid-flow-col auto-cols-fr gap-4">
+          {/* TODO: Make links dynamic */}
+          <Button asChild>
+            <a href="/forms/0">
+              <Folder className="mr-2 w-4" /> View Forms
+            </a>
+          </Button>
 
-      <div className="grid grid-flow-col auto-cols-fr gap-4">
-        {/* TODO: Make link dynamic */}
-        <Button asChild>
-          <a href="/forms/0">
-            <Folder className="mr-2 w-4" /> View Forms
-          </a>
-        </Button>
-        <Button asChild>
-          <a href="">
-          <ReceiptText className="mr-2 w-4" />View Transactions
-          </a>
-        </Button>
-      </div>
-    </div>
-  )
-}
+          <Button asChild>
+            <a href="">
+              <ReceiptText className="mr-2 w-4" />View Transactions
+            </a>
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
-export default EventSelectModal
+export default EventSelectModal;

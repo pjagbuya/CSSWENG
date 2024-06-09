@@ -57,7 +57,8 @@ const DashboardPage = () => {
       </div>
 
       <EventSelectModal
-        show={showEventSelectModal}
+        open={showEventSelectModal}
+        onOpenChange={setShowEventSelectModal}
         onExit={() => setShowEventSelectModal(false)}
       />
 
