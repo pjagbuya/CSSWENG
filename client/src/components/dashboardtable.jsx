@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import DataTable from "@/components/datatable";
+import DataTable from "@/components/DataTable";
 import {
   AlertDialog,
   AlertDialogAction,

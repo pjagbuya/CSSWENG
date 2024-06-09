@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import DashboardTable from "@/components/dashboardtable";
+import DashboardTable from "@/components/DashboardTable";
 import EventSelectModal from "@/components/EventSelectModal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
