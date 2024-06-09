@@ -25,7 +25,7 @@ const DashboardPage = () => {
         <main className="px-6 py-4 flex flex-col gap-4 text-left">
           <div>
             <h2 className="font-bold text-2xl">Events Dashboard</h2>
-            <p>Here&apos;s a list of all the events.</p>
+            <p>Here's a list of all the events.</p>
           </div>
 
           <div className="flex justify-between">
