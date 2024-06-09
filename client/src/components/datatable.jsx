@@ -1,16 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
-  PaginationNext,
-  PaginationPrevious,
-  } from "@/components/ui/pagination"
+} from "@/components/ui/dropdown-menu";
+import { PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import {
   Table,
   TableBody,
@@ -18,15 +15,15 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { 
-  flexRender, 
-  getCoreRowModel, 
+} from "@/components/ui/table";
+import {
+  flexRender,
+  getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable 
-} from '@tanstack/react-table'
+  useReactTable,
+} from "@tanstack/react-table";
 
 // TODO: Expose events for editing, deleting, and selecting an event
 
@@ -35,14 +32,18 @@ const DataTable = ({
   columns,
   data,
   eventFilter,
-  onRowSelect
+  onRowEdit,
+  onRowDelete,
+  onRowSelect,
 }) => {
-  if (columns[0].accessorKey !== 'name') {
-    throw new Error('The first column of a table must have a field name `name`.');
+  if (columns[0].accessorKey !== "name") {
+    throw new Error(
+      "The first column of a table must have a field name `name`.",
+    );
   }
 
-  const [sorting, setSorting] = useState([])
-  const [columnFilters, setColumnFilters] = useState([])
+  const [sorting, setSorting] = useState([]);
+  const [columnFilters, setColumnFilters] = useState([]);
 
   const table = useReactTable({
     data,
@@ -57,16 +58,16 @@ const DataTable = ({
       sorting,
       columnFilters,
     },
-  })
+  });
 
-  const currentPageNum = table.getState().pagination.pageIndex + 1
+  const currentPageNum = table.getState().pagination.pageIndex + 1;
 
   useEffect(() => {
-    table.getColumn("name")?.setFilterValue(eventFilter ?? '')
-  }, [table, eventFilter])
+    table.getColumn("name")?.setFilterValue(eventFilter ?? "");
+  }, [table, eventFilter]);
 
   return (
-    <div className='flex flex-col'>
+    <div className="flex flex-col">
       <Table className={className}>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -78,10 +79,10 @@ const DataTable = ({
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
-                )
+                );
               })}
 
               {/* Extra to accommodate edit button */}
@@ -89,7 +90,7 @@ const DataTable = ({
             </TableRow>
           ))}
         </TableHeader>
-        
+
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
@@ -98,29 +99,33 @@ const DataTable = ({
                 data-state={row.getIsSelected() && "selected"}
               >
                 {row.getVisibleCells().map((cell) => {
-                  const body = cell.column.id === 'name'
-                    ? (
+                  const body =
+                    cell.column.id === "name" ? (
                       <Button variant="ghost" onClick={onRowSelect}>
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
                       </Button>
-                    )
-                    : (
+                    ) : (
                       flexRender(cell.column.columnDef.cell, cell.getContext())
                     );
 
-                  return (
-                    <TableCell key={cell.id}>
-                      {body}
-                    </TableCell>
-                  );
+                  return <TableCell key={cell.id}>{body}</TableCell>;
                 })}
 
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger>...</DropdownMenuTrigger>
                     <DropdownMenuContent>
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem>Delete</DropdownMenuItem>
+                      {/* TODO: Pass relevant parameters */}
+                      <DropdownMenuItem onClick={onRowEdit}>
+                        Edit
+                      </DropdownMenuItem>
+
+                      <DropdownMenuItem onClick={onRowDelete}>
+                        Delete
+                      </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>
@@ -129,31 +134,35 @@ const DataTable = ({
           ) : (
             <TableRow>
               {/* +1 to accommodate edit button header */}
-              <TableCell colSpan={columns.length + 1} className="h-24 text-center">
+              <TableCell
+                colSpan={columns.length + 1}
+                className="h-24 text-center"
+              >
                 No results.
               </TableCell>
             </TableRow>
-          )}    
+          )}
         </TableBody>
       </Table>
 
       <div className="self-end mt-2 flex gap-2 items-center">
-        <p>Page {currentPageNum} of {table.getPageCount()}</p>
+        <p>
+          Page {currentPageNum} of {table.getPageCount()}
+        </p>
 
-        <PaginationPrevious 
+        <PaginationPrevious
           className="cursor-pointer"
           onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()} 
+          disabled={!table.getCanPreviousPage()}
         />
         <PaginationNext
           className="cursor-pointer"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
-        />      
+        />
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default DataTable
+export default DataTable;
