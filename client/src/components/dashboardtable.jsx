@@ -131,13 +131,15 @@ const TEMP_DATA = [
         
 const DashboardTable = ({
   className,
-  eventFilter
+  eventFilter,
+  onEventSelect
 }) => {
   return <DataTable 
     className={className}
     columns={TEMP_COLUMNS} 
     data={TEMP_DATA} 
-    eventFilter={eventFilter} 
+    eventFilter={eventFilter}
+    onRowSelect={onEventSelect}
   />
 };
 

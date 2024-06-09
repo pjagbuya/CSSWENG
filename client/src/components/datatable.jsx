@@ -34,7 +34,8 @@ const DataTable = ({
   className,
   columns,
   data,
-  eventFilter
+  eventFilter,
+  onRowSelect
 }) => {
   if (columns[0].accessorKey !== 'name') {
     throw new Error('The first column of a table must have a field name `name`.');
@@ -99,7 +100,7 @@ const DataTable = ({
                 {row.getVisibleCells().map((cell) => {
                   const body = cell.column.id === 'name'
                     ? (
-                      <Button variant="ghost">
+                      <Button variant="ghost" onClick={onRowSelect}>
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </Button>
                     )
