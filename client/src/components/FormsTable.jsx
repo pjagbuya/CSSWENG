@@ -1,4 +1,4 @@
-import DataTable from '@/components/datatable';
+import DataTable from '@/components/DataTable';
 import { Button } from '@/components/ui/button'
 import { ArrowUpDown } from 'lucide-react'
 import { Badge } from '@/components/ui/badge';
